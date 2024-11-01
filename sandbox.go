@@ -2,10 +2,10 @@ package go_vm
 
 import (
 	"fmt"
-	"github.com/mikez/go-vm/javascript"
-	"github.com/mikez/go-vm/lua"
-	"github.com/mikez/go-vm/python"
-	"github.com/mikez/go-vm/utils"
+	"github.com/meiyoutoufa/go-vm/javascript"
+	"github.com/meiyoutoufa/go-vm/lua"
+	"github.com/meiyoutoufa/go-vm/python"
+	"github.com/meiyoutoufa/go-vm/utils"
 )
 
 type sandbox interface {

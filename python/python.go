@@ -4,7 +4,7 @@ import (
 	_ "embed"
 	"errors"
 	"fmt"
-	"github.com/mikez/go-vm/utils"
+	"github.com/meiyoutoufa/go-vm/utils"
 	"os"
 	"os/exec"
 	"strconv"

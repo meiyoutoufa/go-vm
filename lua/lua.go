@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/mikez/go-vm/utils"
+	"github.com/meiyoutoufa/go-vm/utils"
 	lua "github.com/yuin/gopher-lua"
 	"time"
 )

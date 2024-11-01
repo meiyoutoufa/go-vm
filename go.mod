@@ -1,4 +1,4 @@
-module github.com/mikez/go-vm
+module github.com/meiyoutoufa/go-vm
 
 go 1.18
 
