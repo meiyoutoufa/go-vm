@@ -99,6 +99,7 @@ func (p *SandboxPython) RunScript(code string) error {
 	if utils.CountBackParameters(code) < 1 {
 		return nil
 	}
+
 	space := strings.TrimSpace(outPutStr)
 	split := strings.Split(space, "\n")
 	fmt.Println(space)
