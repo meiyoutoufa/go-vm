@@ -81,7 +81,7 @@ func (p *SandboxPython) RunScript(code string) error {
 	}
 	defer os.Remove(pyFileName)
 	cmdArgs := make([]string, 0)
-	cmdArgs = append(cmdArgs, "./main.py")
+	cmdArgs = append(cmdArgs, "./"+pyFileName)
 	cmdArgs = append(cmdArgs, p.args...)
 	cmd := exec.Command(p.pythonVersion, cmdArgs...)
 	output, err := cmd.Output()
@@ -143,7 +143,7 @@ func templatePythonFile(code, funcName string, args ...string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	file, err := os.Create("./main.py")
+	file, err := os.CreateTemp(".", "main*.py")
 	if err != nil {
 		return "", err
 	}
