@@ -75,10 +75,11 @@ func (p *SandboxPython) ParseArgs(args ...interface{}) error {
 }
 
 func (p *SandboxPython) RunScript(code string) error {
-	err := templatePythonFile(code, p.funcName, p.args...)
+	pyFileName, err := templatePythonFile(code, p.funcName, p.args...)
 	if err != nil {
 		return err
 	}
+	defer os.Remove(pyFileName)
 	cmdArgs := make([]string, 0)
 	cmdArgs = append(cmdArgs, "./main.py")
 	cmdArgs = append(cmdArgs, p.args...)
@@ -125,7 +126,7 @@ func (p *SandboxPython) GetResult() interface{} {
 	return value
 }
 
-func templatePythonFile(code, funcName string, args ...string) error {
+func templatePythonFile(code, funcName string, args ...string) (string, error) {
 	var tplObj tpl
 	//没有funcName 则直接运行的内容
 	if len(funcName) == 0 {
@@ -133,22 +134,22 @@ func templatePythonFile(code, funcName string, args ...string) error {
 	} else {
 		parseFunc, err := getParseFunc(funcName, args...)
 		if err != nil {
-			return err
+			return "", err
 		}
 		tplObj = tpl{Code: code, CodeCited: parseFunc}
 	}
 
 	t, err := template.New("tpl1").Parse(tmpl)
 	if err != nil {
-		return err
+		return "", err
 	}
 	file, err := os.Create("./main.py")
 	if err != nil {
-		return err
+		return "", err
 	}
 	defer file.Close()
 	err = t.Execute(file, tplObj)
-	return err
+	return file.Name(), err
 }
 
 func getParseFunc(funcName string, args ...string) (string, error) {
